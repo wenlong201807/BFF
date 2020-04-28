@@ -9,17 +9,69 @@
 <div>
   <h1>我是首页999****[[data]]</h1>
   <hr>
-  <div id="app-5">
+  <input type="button" id="js-btn" value="点击我，测试节流功能">
+  <!-- <div id="app-5">
     <p>hh:{{ message }}</p>
     <input type="text" v-model="message">
     <button v-on:click="reverseMessage">反转消息</button>
-  </div>
+  </div> -->
 </div>
 {% endblock %}
 
 {% block scripts %}
-<script src="/scripts/index.js"></script>
+<!-- <script src="/scripts/index.js"></script> -->
+<script src="/scripts/yd.js"></script>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/systemjs/6.3.1/system.js" type="module"></script>
+
+<script type="module">
+  // 这段代码进不到浏览器中了！！！
+  // console.log('nomodule')
+  // console.log('module')
+
+  // System.import('/scripts/index.js').then(result => {
+  //   console.log('使用es5 Module===systemjs',result.default)
+  // })
+</script>
+
+<script type="module">
+  // 模块化使用方式 type="module"  ***现在不写 type="module" 也可以支持了，浏览器升级了
+// 动态加载js文件，少了单独编译过程
+System.import('/scripts/index-bundle.js').then(result => { // 使用babel编译之后的js
+// import('/scripts/index.js').then(result => {
+  console.log('使用system--module==',result.default)
+})
+
+</script>
+
 <script>
-  console.log('index...66,页面内的脚本');
+  // console.log('index...66,页面内的脚本');
+
+  // 测试underscore
+  // console.log(_)
+  // 第一种使用方式**一样的效果
+  // _.map('京城一灯🏮', function () { // 小图标的长度为2，小细节
+  //   console.log(124)
+  // })
+
+  // // 第二种使用方式
+  // _('京城一灯🏮').map(function(){
+  //   console.log(456)
+  // })
+  // 第二种方式的扩展模式**不一样的效果[('京城一灯🏮') 这个出不来？？？]
+  // _('京城一灯🏮').map('xx',function(){
+  //   console.log(456)
+  // })
+
+  const {
+    throttle
+  } = _
+  const btn = document.getElementById('js-btn')
+  // btn.addEventListener('click',() => {
+  //   console.log(666)
+  // })
+  btn.addEventListener('click', throttle(() => {
+    console.log(Math.random())
+  }))
 </script>
 {% endblock %}

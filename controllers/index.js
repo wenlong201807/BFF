@@ -8,7 +8,8 @@ const apiController = new ApiController()
 module.exports = app => {
   app.use(router(_ => {
     _.get('/', indexController.actionIndex) // 跟路由渲染页面的
-    // _.get('/books/list', booksController.actionIndex)
-    _.get('/api/list', apiController.actionIndex) // 专门负责数据的
+    _.get('/index.html', indexController.actionIndex) // 默认的首页
+    _.get('/books/list', booksController.actionIndex)
+    // _.get('/api/list', apiController.actionIndex) // 专门负责数据的
   }))
 }

@@ -12,3 +12,80 @@ MPA + SPA 实现最基本的前后端很混路由
 核心点：
 const { historyApiFallback } = require('koa2-connect-history-api-fallback')
 app.use(historyApiFallback({ index: '/', whiteList: ['/api'] })) // 开启前后端混合接口模式，刷新不丢失页面
+
+第二次
+1.写日志的log4js
+https://www.npmjs.com/package/log4js
+
+2.koa执行顺序
+洋葱模型
+参考  https://www.cnblogs.com/lfri/p/11936520.html
+const Koa = require("koa");
+const app = new Koa;
+
+app.use(async (ctx, next) => {
+    console.log('1'); 
+    await next(); // 调用下一个middleware
+    console.log('5')
+});
+app.use(async (ctx, next) => {
+    console.log('2');
+    await next(); // 调用下一个middleware
+    console.log('4');
+});
+app.use(async (ctx, next) => {
+    console.log('3');
+});
+
+app.listen(3000)
+console.log("listening on port 3000")
+
+3.404公益页面，找寻丢失的小孩
+公益 404 页面介绍  https://www.qq.com/404/
+
+4.记录错误日志的实用内容
+[2020-04-28T12:38:15.908] [ERROR] cheese - ReferenceError: data is not defined
+    at actionIndex (D:\gitCode\deng\BFF\controllers\IndexController.js:13:7)  // 这一行有用的，其余都是废话
+    at dispatch (D:\gitCode\deng\BFF\node_modules\koa-simple-router\index.js:186:18)
+    at Router._lookup (D:\gitCode\deng\BFF\node_modules\koa-simple-router\index.js:198:12)
+    at D:\gitCode\deng\BFF\node_modules\koa-simple-router\index.js:138:21
+    at dispatch (D:\gitCode\deng\BFF\node_modules\koa-compose\index.js:42:32)
+    at D:\gitCode\deng\BFF\middlewares\errorHandler.js:21:13
+    at dispatch (D:\gitCode\deng\BFF\node_modules\koa-compose\index.js:42:32)
+    at D:\gitCode\deng\BFF\middlewares\errorHandler.js:7:15
+    at dispatch (D:\gitCode\deng\BFF\node_modules\koa-compose\index.js:42:32)
+    at serve (D:\gitCode\deng\BFF\node_modules\koa-static\index.js:53:15)
+
+5.函数节流
+函数节流与函数防抖  https://juejin.im/entry/58c0379e44d9040068dc952f
+节流：一段时间内，只执行依次
+防抖：上一次操作与下一次操作至少间隔相同时间
+
+6.https://underscorejs.org/
+
+7.简化版的underscore.js  使用throttle
+
+8.尤雨溪在 vue3.0 beta 上推荐的 no webpack 小工具 vite  
+https://juejin.im/post/5e9fc11051882573b436203f
+vite : 一个基于浏览器原生 ES imports 的开发服务器，利用管浏览器去解析imports
+  在服务器端按需编译返回，，完全跳过了打包这个概念，服务器随起随用。
+  同时，不仅有vue文件支持，还搞定了热更新，而且热更新的熟读不会随着模块增多而变慢。
+  针对生产环境则可以把同一份代码用rollup打包。
+  虽然现在还不叫粗糙，但是这个方向我觉得是有潜力的，做的好可以彻底解决改一行代码等半天热更新的问题
+
+
+9.systemjs   // 微前端架构部署使用的
+https://www.bootcdn.cn/systemjs/
+<script src="https://cdn.bootcdn.net/ajax/libs/systemjs/6.3.1/system.js"></script>
+使用 Babel  https://www.babeljs.cn/setup#installation
+
+ process.env.NODE_ENV
+ 这个在生产环境怎么查看它的值
+
+10. php中关闭csrf
+public $enableCsrfValidation = false
+
+
+
+
+
