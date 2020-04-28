@@ -1,0 +1,25 @@
+{% extends './layout.html' %}
+{% block title%}首页888{% endblock%}
+
+{% block head%}
+<link rel="stylesheet" href="/styles/index.css" />
+{% endblock %}
+
+{% block content %}
+<div>
+  <h1>我是首页999****[[data]]</h1>
+  <hr>
+  <div id="app-5">
+    <p>hh:{{ message }}</p>
+    <input type="text" v-model="message">
+    <button v-on:click="reverseMessage">反转消息</button>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/scripts/index.js"></script>
+<script>
+  console.log('index...66,页面内的脚本');
+</script>
+{% endblock %}

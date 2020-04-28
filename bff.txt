@@ -1,0 +1,14 @@
+生产文档工具
+swagger  更好看
+jsdoc  老牌东西，有十年了 
+npm run api:docs  // 失败
+
+多页应用与单页应用的混合使用
+MPA
+SPA
+
+*****
+MPA + SPA 实现最基本的前后端很混路由
+核心点：
+const { historyApiFallback } = require('koa2-connect-history-api-fallback')
+app.use(historyApiFallback({ index: '/', whiteList: ['/api'] })) // 开启前后端混合接口模式，刷新不丢失页面
